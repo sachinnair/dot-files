@@ -1,9 +1,9 @@
 set nocompatible              " be iMproved, required
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 set foldmethod=syntax
 set background=dark
-set t_Co=256
+" set t_Co=256
 let g:NERDTreeDirArrows=0
 let g:typescript_indent_disable = 1
 
@@ -12,9 +12,13 @@ syntax enable
 syntax on
 set number
 set foldlevelstart=20
+set ffs=unix,mac,dos
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+
+autocmd BufNewFile,BufRead *.json set ft=javascript
+
 call vundle#begin()
     " alternatively, pass a path where Vundle should install plugins
     "call vundle#begin('~/some/path/here')
@@ -35,14 +39,13 @@ call vundle#begin()
     " Plugin 'file:///home/gmarik/path/to/plugin'
     " The sparkup vim script is in a subdirectory of this repo called vim.
     " Pass the path to set the runtimepath properly.
-    Plugin 'flazz/vim-colorschemes'
+    " Plugin 'flazz/vim-colorschemes'
     Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 
     " Plugin 'git://github.com/altercation/vim-colors-solarized.git'
-    " set background=dark
-    " let g:solarized_termcolors=256
-    "colorscheme solarized
+    Plugin 'chriskempson/base16-vim'
+
 
     " Avoid a name conflict with L9
     " Plugin 'user/L9', {'name': 'newL9'}
@@ -64,6 +67,11 @@ call vundle#begin()
     " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" syntax enable
+" set background=dark
+" let g:solarized_termcolors=256
+" colorscheme solarized
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -75,3 +83,9 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+"
+"
+if filereadable(expand("~/.vimrc_background"))
+    let base16colorspace=256
+    source ~/.vimrc_background
+endif
